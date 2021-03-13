@@ -277,6 +277,22 @@
 				<picUrl>shorturl.at/sxGW6</picUrl>
 			</properties>
 		</developer>
+		<developer>
+			<id>JJosePP</id>
+			<name>Juan José Pérez Plata</name>
+			<email>jjperezplata@gmail.com</email>
+			<url>https://github.com/JJosePP</url>
+			<organization>Universidad de Sevilla</organization>
+			<organizationUrl>https://www.us.es/</organizationUrl>
+			<roles>
+				<role>Scrum Master</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Madrid</timezone>
+			<properties>
+				<picUrl>shorturl.at/iyJ19</picUrl>
+			</properties>
+		</developer>
 	</developers>
 
 
