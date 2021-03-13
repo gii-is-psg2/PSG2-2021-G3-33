@@ -262,6 +262,21 @@
 				<picUrl>shorturl.at/rLST6</picUrl>
 			</properties>
 		</developer>
+		<developer>
+			<id>ezepersos</id>
+			<name>Ezequiel Pérez Sosa</name>
+			<email>ezepersos@alum.us.es</email>
+			<url>https://github.com/ezequielp98</url>
+			<organization>Universidad de Sevilla</organization>
+			<organizationUrl>https://www.us.es/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Madrid</timezone>
+			<properties>
+				<picUrl>shorturl.at/sxGW6</picUrl>
+			</properties>
+		</developer>
 	</developers>
 
 
