@@ -308,6 +308,22 @@
 				<picUrl>shorturl.at/moBN3</picUrl>
 			</properties>
 		</developer>
+		<developer>
+			<id>feralito4</id>
+			<name>Sergio López López</name>
+			<email>feralito4@gmail.com</email>
+			<url>https://github.com/feralito4</url>
+			<organization>Universidad de Sevilla</organization>
+			<organizationUrl>https://www.us.es/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Madrid</timezone>
+			<properties>
+				<picUrl>shorturl.at/elstT</picUrl>
+			</properties>
+		</developer>
+		
 	</developers>
 
 
