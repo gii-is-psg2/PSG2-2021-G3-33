@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.BeanUtils;
@@ -51,7 +52,7 @@ public class PetController {
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
 	private final PetService petService;
-        private final OwnerService ownerService;
+    	private final OwnerService ownerService;
 
 	@Autowired
 	public PetController(PetService petService, OwnerService ownerService) {
@@ -151,4 +152,20 @@ public class PetController {
 		}
 	}
 
+    	@GetMapping("/pets/{petId}/delete")
+    	public String deletePet(@PathVariable("petId") int petId,Owner owner, Map<String,Object> model) {
+    		Pet pet = this.petService.findPetById(petId);
+    		owner.removePet(pet);
+    		this.petService.deletePet(pet);
+    		return "owners/ownerDetails";
+    	}
+    	
+    	@GetMapping("/pets/{petId}/{visitId}/delete")
+    	public String deleteVisit(@PathVariable("petId") int petId, @PathVariable("visitId") int visitId, Map<String,Object> model) {
+    		Visit visit = this.petService.findVisitById(visitId);
+    		Pet pet = this.petService.findPetById(petId);
+    		pet.removeVisit(visit);
+    		this.petService.deleteVisit(visit);
+    		return "owners/ownerDetails";
+    	}
 }
