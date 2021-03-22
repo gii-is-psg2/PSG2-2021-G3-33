@@ -40,4 +40,7 @@ public interface VetRepository extends Repository<Vet, Integer>{
 	 */
 	Collection<Vet> findAll() throws DataAccessException;
 
+	void delete(Vet vet) throws DataAccessException;
+	
+	Vet findById(int id) throws DataAccessException;
 }

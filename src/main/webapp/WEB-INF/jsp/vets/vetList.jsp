@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="vets">
@@ -25,6 +26,12 @@
                         <c:out value="${specialty.name} "/>
                     </c:forEach>
                     <c:if test="${vet.nrOfSpecialties == 0}">none</c:if>
+                    <div class="col-sm-offset-9 col-sm-10" >
+							<spring:url value="/vets/{vetId}/delete" var="deleteUrl">
+                				<spring:param name="vetId" value="${vet.id}"></spring:param>
+                			</spring:url>
+                			<a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Eliminar</a>
+            			</div>
                 </td>
             </tr>
         </c:forEach>
