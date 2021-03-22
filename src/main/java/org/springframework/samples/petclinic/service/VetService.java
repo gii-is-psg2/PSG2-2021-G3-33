@@ -17,11 +17,13 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.FormVetType;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.repository.VetRepository;
 import org.springframework.stereotype.Service;
@@ -61,8 +63,13 @@ public class VetService {
 		return this.vetRepository.findById(id);
 	}
 
-	public void save(final Vet vet) throws DataAccessException {
-		this.vetRepository.save(vet);
+	public void save(final FormVetType vet) throws DataAccessException {
+		Vet vetToSave = null;
+		vetToSave = new Vet();
+		vetToSave.setFirstName(vet.getFirstName());
+		vetToSave.setLastName(vet.getLastName());
+		vetToSave.setSpecialties(new HashSet<>(vet.getSpecialties()));
+		this.vetRepository.save(vetToSave);
 	}
 
 }

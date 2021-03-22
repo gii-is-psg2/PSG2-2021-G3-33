@@ -9,13 +9,17 @@
 <petclinic:layout pageName="vets">
 	<h2>New Vet</h2>
 	<form:form modelAttribute="vet" class="form-horizontal"
-		id="add-vet-form">
+		id="add-vet-form" method="POST">
 		<div class="form-group has-feedback">
 			<petclinic:inputField label="First Name" name="firstName" />
 			<petclinic:inputField label="Last Name" name="lastName" />
+			
 			<div class="control-group">
-				<petclinic:selectField name="specialties" label="Specialties"
-					names="${specialties-types}" size="5" />
+				<c:forEach items="${specialtiesTypes}" var="specialty">
+					<input type="checkbox" name="specialties" value="${specialty.id}" />
+					<c:out value="${specialty.name}" />
+				<br>
+				</c:forEach>
 			</div>
 
 		</div>
