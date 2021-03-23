@@ -32,12 +32,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.util.Collection;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Visit;
 
 /**
  * @author Juergen Hoeller
@@ -52,7 +62,6 @@ public class PetController {
 
 	private final PetService	petService;
 	private final OwnerService	ownerService;
-
 
 	@Autowired
 	public PetController(final PetService petService, final OwnerService ownerService) {
@@ -152,4 +161,20 @@ public class PetController {
 		}
 	}
 
+    	@GetMapping("/pets/{petId}/delete")
+    	public String deletePet(@PathVariable("petId") int petId,Owner owner, Map<String,Object> model) {
+    		Pet pet = this.petService.findPetById(petId);
+    		owner.removePet(pet);
+    		this.petService.deletePet(pet);
+    		return "owners/ownerDetails";
+    	}
+    	
+    	@GetMapping("/pets/{petId}/{visitId}/delete")
+    	public String deleteVisit(@PathVariable("petId") int petId, @PathVariable("visitId") int visitId, Map<String,Object> model) {
+    		Visit visit = this.petService.findVisitById(visitId);
+    		Pet pet = this.petService.findPetById(petId);
+    		pet.removeVisit(visit);
+    		this.petService.deleteVisit(visit);
+    		return "owners/ownerDetails";
+    	}
 }

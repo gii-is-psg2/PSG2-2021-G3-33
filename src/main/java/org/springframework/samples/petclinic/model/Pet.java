@@ -109,4 +109,7 @@ public class Pet extends NamedEntity {
 		visit.setPet(this);
 	}
 
+	public boolean removeVisit(Visit visit) {
+		return getVisitsInternal().remove(visit);
+	}
 }

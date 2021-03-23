@@ -79,4 +79,18 @@ public class PetService {
 		return visitRepository.findByPetId(petId);
 	}
 
+	@Transactional
+	public void deletePet(Pet pet) throws DataAccessException {
+		petRepository.delete(pet);
+	}
+	
+	@Transactional
+	public void deleteVisit(Visit visit) throws DataAccessException{
+		visitRepository.delete(visit);
+	}
+	
+	@Transactional(readOnly = true)
+	public Visit findVisitById(int id) throws DataAccessException{
+		return visitRepository.findById(id);
+	}
 }

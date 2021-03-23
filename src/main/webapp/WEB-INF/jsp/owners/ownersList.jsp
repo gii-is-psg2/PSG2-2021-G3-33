@@ -13,9 +13,9 @@
 			<tr>
 				<th style="width: 150px;">Name</th>
 				<th style="width: 200px;">Address</th>
-				<th>City</th>
+				<th  style="width: 120px">City</th>
 				<th style="width: 120px">Telephone</th>
-				<th>Pets</th>
+				<th  style="width: 120px">Pets</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,8 +29,14 @@
 					<td><c:out value="${owner.city}" /></td>
 					<td><c:out value="${owner.telephone}" /></td>
 					<td><c:forEach var="pet" items="${owner.pets}">
-							<c:out value="${pet.name} " />
-						</c:forEach></td>
+							<p><c:out value="${pet.name} " /></p>
+						</c:forEach>
+						<div class="col-sm-offset-12 col-sm-4" >
+							<spring:url value="/owners/{ownerId}/delete" var="deleteUrl">
+                				<spring:param name="ownerId" value="${owner.id}"></spring:param>
+                			</spring:url>
+                			<a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Eliminar</a>
+            			</div></td>
 
 				</tr>
 			</c:forEach>

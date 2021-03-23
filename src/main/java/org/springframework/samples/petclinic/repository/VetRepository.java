@@ -33,4 +33,7 @@ import org.springframework.samples.petclinic.model.Vet;
 
 public interface VetRepository extends JpaRepository<Vet, Integer> {
 
+	void delete(Vet vet) throws DataAccessException;
+	
+	Vet findById(int id) throws DataAccessException;
 }
