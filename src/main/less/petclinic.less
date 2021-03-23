@@ -14,13 +14,17 @@
 @icon-font-path:    "../../webjars/bootstrap/fonts/";
 
 @spring-green:      #6db33f;
-@spring-light-red: #ffcccb;
 @spring-dark-green: #5fa134;
 @spring-brown:      #34302D;
 @spring-grey:       #838789;
 @jose-grey:   	    #D3D3D3;
 @spring-light-grey: #f1f1f1;
-
+//Custom colors
+@spring-brown-custom-1: #e3b660;
+@spring-brown-custom-2: #956900;
+@spring-light-red: #ffcccb;
+@spring-sandy-brown :#f4a460;
+@spring-dark-coral: #cd5b45;
 
 @body-bg:                           @spring-light-grey;
 @text-color:                        @spring-brown;
@@ -30,18 +34,18 @@
 @navbar-default-link-color:         @spring-light-grey;
 @navbar-default-link-active-color:  @spring-light-grey;
 @navbar-default-link-hover-color:   @spring-light-grey;
-@navbar-default-link-hover-bg:      @spring-green;
+@navbar-default-link-hover-bg:      @spring-sandy-brown;
 @navbar-default-toggle-icon-bar-bg: @spring-light-grey;
 @navbar-default-toggle-hover-bg:    transparent;
-@navbar-default-link-active-bg:     @spring-light-red;
+@navbar-default-link-active-bg:     @spring-brown-custom-1;
 
 @border-radius-base:             0;
 @border-radius-large:            0;
 @border-radius-small:            0;
 
 @btn-default-color:              @spring-light-grey;
-@btn-default-bg:                 @spring-brown;
-@btn-default-border:             @spring-green;
+@btn-default-bg:                 @spring-brown-custom-1;
+@btn-default-border:             @spring-sandy-brown;
 
 @nav-tabs-active-link-hover-color:        @spring-light-grey;
 @nav-tabs-active-link-hover-bg:           @spring-brown;
@@ -49,11 +53,11 @@
 @nav-tabs-border-color:                   @spring-brown;
 
 @pagination-active-bg:                    @spring-brown;
-@pagination-active-border:                @spring-green;
-@table-border-color:                      @spring-brown;
+@pagination-active-border:                @spring-sandy-brown;
+@spring-brown-custom-2:                      @spring-brown;
 
 .table > thead > tr > th {
-  background-color: @jose-grey;
+  background-color: @spring-brown-custom-1;
   color: @spring-light-grey;
 }
 
@@ -79,8 +83,8 @@
   &:active,
   &.active,
   .open .dropdown-toggle& {
-    background-color: @spring-brown;
-    border-color: @spring-brown;
+    background-color: @spring-dark-coral;
+    border-color: @spring-dark-coral;
   }
 }
 
@@ -128,7 +132,7 @@ h1 {
 }
 
 .splash {
-  background: @spring-green;
+  background: @spring-sandy-brown;
   color: @spring-brown;
   display: none;
 }
