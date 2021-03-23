@@ -14,6 +14,15 @@
 			<petclinic:inputField label="First Name" name="firstName" />
 			<petclinic:inputField label="Last Name" name="lastName" />
 		</div>
+		<h1>${vet.specialties}</h1>
+		<div class="control-group">
+			<c:forEach items="${specialtiesTypes}" var="specialty">
+				<input type="checkbox" name="specialties" value="${specialty.id}" />
+				<c:out value="${specialty.name}" />
+				<br>
+			</c:forEach>
+		</div>
+
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button class="btn btn-default" type="submit">Update Vet</button>

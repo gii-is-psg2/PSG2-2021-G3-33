@@ -64,12 +64,29 @@ public class VetService {
 	}
 
 	public void save(final FormVetType vet) throws DataAccessException {
-		Vet vetToSave = null;
-		vetToSave = new Vet();
+		final Vet vetToSave = new Vet();
 		vetToSave.setFirstName(vet.getFirstName());
 		vetToSave.setLastName(vet.getLastName());
-		vetToSave.setSpecialties(new HashSet<>(vet.getSpecialties()));
+		if (vet.getSpecialties() == null) {
+			vetToSave.setSpecialties(new HashSet<>());
+		} else {
+			vetToSave.setSpecialties(new HashSet<>(vet.getSpecialties()));
+		}
 		this.vetRepository.save(vetToSave);
+	}
+
+	public void modify(final FormVetType vet, final int vetId) {
+		final Vet modifiedVet = this.vetRepository.findById(vetId).get();
+		modifiedVet.setFirstName(vet.getFirstName());
+		modifiedVet.setLastName(vet.getLastName());
+
+		if (vet.getSpecialties() == null) {
+			modifiedVet.setSpecialties(new HashSet<>());
+		} else {
+			modifiedVet.setSpecialties(new HashSet<>(vet.getSpecialties()));
+		}
+
+		this.vetRepository.save(modifiedVet);
 	}
 
 }

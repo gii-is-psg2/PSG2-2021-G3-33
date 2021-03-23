@@ -84,7 +84,9 @@ public class VetController {
 		if (result.hasErrors()) {
 			return VetController.VIEWS_VET_CREATE_FORM;
 		} else {
+
 			this.vetService.save(vetType);
+
 			return "redirect:/vets";
 		}
 
@@ -102,7 +104,7 @@ public class VetController {
 		formVetType.setFirstName(vet.getFirstName());
 		formVetType.setLastName(vet.getLastName());
 		formVetType.setSpecialties(vet.getSpecialties());
-		//model.addAttribute("vet",vet);
+		model.addAttribute("vet", formVetType);
 		return VetController.VIEWS_VET_EDIT_FORM;
 	}
 
@@ -111,8 +113,7 @@ public class VetController {
 		if (result.hasErrors()) {
 			return VetController.VIEWS_VET_EDIT_FORM;
 		} else {
-			vetType.setId(vetId);
-			this.vetService.save(vetType);
+			this.vetService.modify(vetType, vetId);
 			return "redirect:/vets";
 		}
 	}
