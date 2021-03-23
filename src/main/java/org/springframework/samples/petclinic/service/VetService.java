@@ -19,7 +19,6 @@ package org.springframework.samples.petclinic.service;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -59,7 +58,7 @@ public class VetService {
 		return this.vetRepository.findAll();
 	}
 
-	public Optional<Vet> findById(final int id) throws DataAccessException {
+	public Vet findById(final int id) throws DataAccessException {
 		return this.vetRepository.findById(id);
 	}
 
@@ -76,7 +75,7 @@ public class VetService {
 	}
 
 	public void modify(final FormVetType vet, final int vetId) {
-		final Vet modifiedVet = this.vetRepository.findById(vetId).get();
+		final Vet modifiedVet = this.vetRepository.findById(vetId);
 		modifiedVet.setFirstName(vet.getFirstName());
 		modifiedVet.setLastName(vet.getLastName());
 
@@ -90,12 +89,12 @@ public class VetService {
 	}
 
 	@Transactional
-	public void deleteVet(Vet vet) throws DataAccessException{
-		vetRepository.delete(vet);
+	public void deleteVet(final Vet vet) throws DataAccessException {
+		this.vetRepository.delete(vet);
 	}
-	
+
 	@Transactional(readOnly = true)
-	public Vet findVetById(int id) throws DataAccessException{
-		return vetRepository.findById(id);
+	public Vet findVetById(final int id) throws DataAccessException {
+		return this.vetRepository.findById(id);
 	}
 }

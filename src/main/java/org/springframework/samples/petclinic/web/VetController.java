@@ -22,27 +22,19 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.samples.petclinic.model.FormVetType;
 import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
-
 import org.springframework.samples.petclinic.service.SpecialtyService;
 import org.springframework.samples.petclinic.service.VetService;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Map;
 
 /**
  * @author Juergen Hoeller
@@ -107,7 +99,7 @@ public class VetController {
 
 	@GetMapping(value = "/vets/{vetId}/edit")
 	public String initUpdateVetForm(@PathVariable("vetId") final int vetId, final Model model) {
-		final Vet vet = this.vetService.findById(vetId).get();
+		final Vet vet = this.vetService.findById(vetId);
 		final FormVetType formVetType = new FormVetType();
 		formVetType.setFirstName(vet.getFirstName());
 		formVetType.setLastName(vet.getLastName());
@@ -124,12 +116,13 @@ public class VetController {
 			this.vetService.modify(vetType, vetId);
 			return "redirect:/vets";
 		}
+	}
 
 	@GetMapping("/vets/{vetId}/delete")
-	public String deleteVet(@PathVariable("vetId") int vetId,Map<String,Object> model) {
-		Vet vet = this.vetService.findVetById(vetId);
+	public String deleteVet(@PathVariable("vetId") final int vetId, final Map<String, Object> model) {
+		final Vet vet = this.vetService.findVetById(vetId);
 		this.vetService.deleteVet(vet);
 		return "redirect:/vets";
-    
+
 	}
 }
