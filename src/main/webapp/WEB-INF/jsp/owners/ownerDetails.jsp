@@ -106,9 +106,45 @@
                                 </spring:url>
                                 <a href="${fn:escapeXml(visitUrl)}">Add Visit</a>
                             </td>
+                             <td>
+                                <spring:url value="/owners/{ownerId}/pets/{petId}/rooms/new" var="roomsUrl">
+                                    <spring:param name="ownerId" value="${owner.id}"/>
+                                    <spring:param name="petId" value="${pet.id}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(roomsUrl)}">Añadir estancia</a>
+                            </td>
                         </tr>
                     </table>
                 </td>
+                <td style="verticla-align: top;">
+                	<table class="table-condensed">
+                        <thead>
+                        <tr>
+                        	<th>Rooms</th>
+                            
+                        
+                        </tr>
+                        </thead>
+                        <c:forEach var="room" items="${pet.rooms}">
+                           <c:if test="${!room['new']}">
+                        
+                            <tr>
+                           		<td><c:out value="${room.details}"/></td>
+                                <td><petclinic:localDate date="${room.startDate}" pattern="yyyy-MM-dd"/></td>
+                                <td><petclinic:localDate date="${room.endDate}" pattern="yyyy-MM-dd"/></td>
+                                <td>
+                                <spring:url value="/owners/{ownerId}/pets/{petId}/rooms/{roomId}/delete" var="roomUrl">
+                                	<spring:param name="ownerId" value="${owner.id}"/>
+                                    <spring:param name="petId" value="${pet.id}"/>
+                                    <spring:param name="roomId" value="${room.id}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(roomUrl)}">Eliminar estancia</a>
+                                </td>
+                            </tr>
+                            </c:if>
+                        </c:forEach>
+                        
+                    </table>
             </tr>
 
         </c:forEach>
