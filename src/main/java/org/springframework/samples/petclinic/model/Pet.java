@@ -62,6 +62,9 @@ public class Pet extends NamedEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
 	private Set<Visit> visits;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
+	private Set<Room> rooms;
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
@@ -109,4 +112,48 @@ public class Pet extends NamedEntity {
 		visit.setPet(this);
 	}
 
-}
+	public boolean removeVisit(Visit visit) {
+		return getVisitsInternal().remove(visit);
+	}
+
+//	public Set<Room> getRooms() {
+//		return rooms;
+//	}
+
+	public void setRooms(Set<Room> rooms) {
+		this.rooms = rooms;
+	}
+	
+	protected Set<Room> getRoomsInternal(){
+		if(this.rooms == null) {
+			this.rooms = new HashSet<>();
+		}
+		return this.rooms;
+	}
+	
+	protected void setRoomsInternal(Set<Room> rooms) {
+		this.rooms = rooms;
+	}
+	
+	public List<Room> getRooms(){
+		List<Room> sortedRooms = new ArrayList<>(this.getRoomsInternal());
+		PropertyComparator.sort(sortedRooms, new MutableSortDefinition("startDate",false,false));
+		return Collections.unmodifiableList(sortedRooms);
+	}
+	
+	public void addRoom(Room room) {
+		this.getRoomsInternal().add(room);
+		room.setPet(this);
+	}
+	
+	public void deleteRoom(Room room) { // poner como deleteVisits para ver si funciona
+		List<Room> rooms = this.getRooms();
+		for(Room r : rooms) {
+			if(r.getDetails() == null) {
+				this.rooms.remove(r);
+			}
+		}
+		this.rooms.remove(room);
+		room.setPet(this);
+	}
+} 

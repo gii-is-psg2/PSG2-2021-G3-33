@@ -49,6 +49,14 @@ public class Vet extends Person {
 			inverseJoinColumns = @JoinColumn(name = "specialty_id"))
 	private Set<Specialty> specialties;
 
+	public Set<Specialty> getSpecialties(){
+		return this.specialties;
+	}
+	
+	public void setSpecialties(final Set<Specialty> specialties) {
+		this.specialties = specialties;
+	}
+
 	protected Set<Specialty> getSpecialtiesInternal() {
 		if (this.specialties == null) {
 			this.specialties = new HashSet<>();
@@ -56,23 +64,23 @@ public class Vet extends Person {
 		return this.specialties;
 	}
 
-	protected void setSpecialtiesInternal(Set<Specialty> specialties) {
+	protected void setSpecialtiesInternal(final Set<Specialty> specialties) {
 		this.specialties = specialties;
 	}
 
 	@XmlElement
-	public List<Specialty> getSpecialties() {
-		List<Specialty> sortedSpecs = new ArrayList<>(getSpecialtiesInternal());
+	public List<Specialty> getSpecialtiesInXml() {
+		final List<Specialty> sortedSpecs = new ArrayList<>(this.getSpecialtiesInternal());
 		PropertyComparator.sort(sortedSpecs, new MutableSortDefinition("name", true, true));
 		return Collections.unmodifiableList(sortedSpecs);
 	}
 
 	public int getNrOfSpecialties() {
-		return getSpecialtiesInternal().size();
+		return this.getSpecialtiesInternal().size();
 	}
 
-	public void addSpecialty(Specialty specialty) {
-		getSpecialtiesInternal().add(specialty);
+	public void addSpecialty(final Specialty specialty) {
+		this.getSpecialtiesInternal().add(specialty);
 	}
 
 }
