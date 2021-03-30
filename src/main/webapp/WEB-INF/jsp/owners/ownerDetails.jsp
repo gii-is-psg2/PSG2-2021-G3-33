@@ -36,7 +36,7 @@
     <spring:url value="/owners/{ownerId}/delete" var="deleteUrl">
         <spring:param name="ownerId" value="${owner.id}"/>
     </spring:url>
-    <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Eliminar dueño</a>
+    <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default"><fmt:message key="deleteOwner"/></a>
 
     <spring:url value="{ownerId}/pets/new" var="addUrl">
         <spring:param name="ownerId" value="${owner.id}"/>
@@ -80,7 +80,7 @@
                                     	<spring:param name="petId" value="${pet.id}"/>
                                     	<spring:param name="visitId" value="${visit.id}"/>
                                 	</spring:url>
-                                	<a href="${fn:escapeXml(visitUrl)}">Cancelar Visita</a>
+                                	<a href="${fn:escapeXml(visitUrl)}"><fmt:message key="cancelledVisit"/></a>
                             	</td>
                             </tr>
                         </c:forEach>
@@ -97,7 +97,7 @@
                                     <spring:param name="ownerId" value="${owner.id}"/>
                                     <spring:param name="petId" value="${pet.id}"/>
                                 </spring:url>
-                                <a href="${fn:escapeXml(petUrl)}">Eliminar mascota</a>
+                                <a href="${fn:escapeXml(petUrl)}"><fmt:message key="deletePet"/></a>
                             </td>
                             <td>
                                 <spring:url value="/owners/{ownerId}/pets/{petId}/visits/new" var="visitUrl">
@@ -111,7 +111,7 @@
                                     <spring:param name="ownerId" value="${owner.id}"/>
                                     <spring:param name="petId" value="${pet.id}"/>
                                 </spring:url>
-                                <a href="${fn:escapeXml(roomsUrl)}">Añadir estancia</a>
+                                <a href="${fn:escapeXml(roomsUrl)}"><fmt:message key="addStay"/></a>
                             </td>
                         </tr>
                     </table>
@@ -120,7 +120,7 @@
                 	<table class="table-condensed">
                         <thead>
                         <tr>
-                        	<th>Rooms</th>
+                        	<th><fmt:message key="rooms"/></th>
                             
                         
                         </tr>
@@ -138,7 +138,7 @@
                                     <spring:param name="petId" value="${pet.id}"/>
                                     <spring:param name="roomId" value="${room.id}"/>
                                 </spring:url>
-                                <a href="${fn:escapeXml(roomUrl)}">Eliminar estancia</a>
+                                <a href="${fn:escapeXml(roomUrl)}"><fmt:message key="deleteStay"/></a>
                                 </td>
                             </tr>
                             </c:if>

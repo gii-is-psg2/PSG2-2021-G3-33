@@ -26,10 +26,10 @@
 						</c:forEach> <c:if test="${vet.nrOfSpecialties == 0}">none</c:if></td>
 					<td><spring:url value="/vets/{vetId}/edit" var="modifyUrl">
 							<spring:param name="vetId" value="${vet.id}"></spring:param>
-						</spring:url> <a href="${fn:escapeXml(modifyUrl)}" class="btn btn-default">Modificar</a>
+						</spring:url> <a href="${fn:escapeXml(modifyUrl)}" class="btn btn-default"><fmt:message key="modify"/></a>
 						<spring:url value="/vets/{vetId}/delete" var="deleteUrl">
 							<spring:param name="vetId" value="${vet.id}"></spring:param>
-						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Eliminar</a></td>
+						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default"><fmt:message key="delete"/></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -38,7 +38,8 @@
 		<tr>
 			<td>
 				<form action="vets/new">
-					<input type="submit" value="Create Vet" />
+									<button class="btn btn-default" name="create" value="Create Vet"
+					type="submit"><fmt:message key="createVet"/></button>
 				</form>
 			</td>
 		</tr>

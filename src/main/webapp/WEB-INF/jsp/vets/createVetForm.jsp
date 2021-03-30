@@ -7,12 +7,14 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 
 <petclinic:layout pageName="vets">
-	<h2>New Vet</h2>
+	<h2><fmt:message key="newVet"/></h2>
 	<form:form modelAttribute="vet" class="form-horizontal"
 		id="add-vet-form" method="POST">
 		<div class="form-group has-feedback">
-			<petclinic:inputField label="First Name" name="firstName" />
-			<petclinic:inputField label="Last Name" name="lastName" />
+		    <fmt:message var="firstName" key="firstName"/>
+        	<fmt:message var="lastName" key="lastName"/>
+            <petclinic:inputField label="${firstName}" name="firstName"/>
+            <petclinic:inputField label="${lastName}" name="lastName"/>
 			
 			<div class="control-group">
 				<c:forEach items="${specialtiesTypes}" var="specialty">
@@ -27,7 +29,7 @@
 			<div class="col-sm-offset-2 col-sm-10">
 
 				<button class="btn btn-default" name="save" value="Save Vet"
-					type="submit">Create Vet</button>
+					type="submit"><fmt:message key="createVet"/></button>
 
 			</div>
 		</div>
