@@ -25,10 +25,10 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Fecha de nacimiento</th>
-                <th>Tipo de mascota</th>
-                <th>Dueño</th>
+                <th><fmt:message key="name"/></th>
+                <th><fmt:message key="birthDate"/></th>
+                <th><fmt:message key="type"/></th>
+                <th><fmt:message key="owner"/></th>
             </tr>
             </thead>
             <tr>
@@ -40,13 +40,13 @@
         </table>
         
            <br/>
-        <h2>Previous Room</h2>
+        <h2><fmt:message key="previousRoom"/></h2>
         <table class="table table-striped">
         <thead>
             <tr>
-            	<th>Detalles</th>
-                <th>Inicio de la estancia</th>
-                <th>Final de la estancia</th>
+            	<th><fmt:message key="details"/></th>
+                <th><fmt:message key="startOfStay"/></th>
+                <th><fmt:message key="finishOfStay"/></th>
             </tr>
         </thead>
             <c:forEach var="room" items="${room.pet.rooms}">
@@ -70,7 +70,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input type="hidden" name="petId" value="${room.pet.id}"/>
-                    <button class="btn btn-default" type="submit">Añadir estancia</button>
+                    <button class="btn btn-default" type="submit"><fmt:message key="addStay"/></button>
                 </div>
             </div>
         </form:form>     

@@ -7,13 +7,13 @@
 
 
 <petclinic:layout pageName="vets">
-	<h2>Veterinarians</h2>
+    <h2><fmt:message key="veterinarians"/></h2>
 
 	<table id="vetsTable" class="table table-striped">
 		<thead>
 			<tr>
-				<th>Name</th>
-				<th>Specialties</th>
+            <th><fmt:message key="name"/></th>
+            <th><fmt:message key="specialties"/></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -26,20 +26,20 @@
 						</c:forEach> <c:if test="${vet.nrOfSpecialties == 0}">none</c:if></td>
 					<td><spring:url value="/vets/{vetId}/edit" var="modifyUrl">
 							<spring:param name="vetId" value="${vet.id}"></spring:param>
-						</spring:url> <a href="${fn:escapeXml(modifyUrl)}" class="btn btn-default">Modificar</a>
+						</spring:url> <a href="${fn:escapeXml(modifyUrl)}" class="btn btn-default"><fmt:message key="modify"/></a>
 						<spring:url value="/vets/{vetId}/delete" var="deleteUrl">
 							<spring:param name="vetId" value="${vet.id}"></spring:param>
-						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Eliminar</a></td>
+						</spring:url> <a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default"><fmt:message key="delete"/></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
 	<table class="table-buttons">
 		<tr>
 			<td>
 				<form action="vets/new">
-					<input type="submit" value="Create Vet" />
+									<button class="btn btn-default" name="create" value="Create Vet"
+					type="submit"><fmt:message key="createVet"/></button>
 				</form>
 			</td>
 		</tr>

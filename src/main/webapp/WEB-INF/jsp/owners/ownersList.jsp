@@ -6,16 +6,16 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 
 <petclinic:layout pageName="owners">
-	<h2>Owners</h2>
+	<h2><fmt:message key="owners"/></h2>
 
 	<table id="ownersTable" class="table table-striped">
 		<thead >
 			<tr>
-				<th style="width: 150px;">Name</th>
-				<th style="width: 200px;">Address</th>
-				<th  style="width: 120px">City</th>
-				<th style="width: 120px">Telephone</th>
-				<th  style="width: 120px">Pets</th>
+				<th style="width: 150px;"><fmt:message key="name"/></th>
+				<th style="width: 200px;"><fmt:message key="address"/></th>
+				<th><fmt:message key="city"/></th>
+				<th style="width: 120px"><fmt:message key="telephone"/></th>
+				<th><fmt:message key="pet"/></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,7 +35,7 @@
 							<spring:url value="/owners/{ownerId}/delete" var="deleteUrl">
                 				<spring:param name="ownerId" value="${owner.id}"></spring:param>
                 			</spring:url>
-                			<a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Eliminar</a>
+                			<a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default"><fmt:message key="delete"/></a>
             			</div></td>
 
 				</tr>
