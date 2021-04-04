@@ -24,26 +24,26 @@
 			<ul class="nav navbar-nav">
 
 				<petclinic:menuItem active="${name eq 'home'}" url="/"
-					title="home page">
+					title="Menú Principal">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<span><fmt:message key="home" /></span>
 				</petclinic:menuItem>
 				<sec:authorize access="hasAnyAuthority('admin')">
 					<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
-						title="find owners">
+						title="Buscar Propietarios">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						<span><fmt:message key="findOwners" /></span>
 					</petclinic:menuItem>
 				</sec:authorize>
 				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
-					title="veterinarians">
+					title="Veterinarios">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span><fmt:message key="veterinarians" /></span>
 				</petclinic:menuItem>
 
 				<sec:authorize access="hasAnyAuthority('admin')">
 					<petclinic:menuItem active="${name eq 'error'}" url="/oups"
-						title="trigger a RuntimeException to see how it is handled">
+						title="Muestra la vista de error">
 						<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 						<span>Error</span>
 					</petclinic:menuItem>

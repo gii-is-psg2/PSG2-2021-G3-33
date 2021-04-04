@@ -8,12 +8,14 @@
 
 
 <petclinic:layout pageName="vets">
-	<h2>Modify Vet</h2>
+	<h2>Modificar Veterinario</h2>
 	<form:form modelAttribute="vet" class="form-horizontal"
 		id="modify-vet-form">
 		<div class="form-group has-feedback">
-			<petclinic:inputField label="First Name" name="firstName" />
-			<petclinic:inputField label="Last Name" name="lastName" />
+			<fmt:message var="firstName" key="firstName" />
+			<fmt:message var="lastName" key="lastName" />
+			<petclinic:inputField label="${firstName}" name="firstName" />
+			<petclinic:inputField label="${lastName}" name="lastName" />
 		</div>
 
 		<div class="control-group">
@@ -43,7 +45,8 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button class="btn btn-default" type="submit">Update Vet</button>
+				<button class="btn btn-default" type="submit">Actualizar
+					Veterinario</button>
 			</div>
 		</div>
 	</form:form>
