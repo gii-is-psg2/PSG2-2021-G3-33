@@ -2,7 +2,7 @@
 
 ### Sprint 3: L3-Measurement 
 
-| Day           | J. A. Parejo  |
+| Day           | Emoji Example  |
 | ------------- | ------------- |
 | Day 1         |    :smiley: (Meaning that I am learning, I like the work and I think I can do it without problems, but with some effort) |
 | Day 2         |    - (Meaning that I did no work regarding the PSG2 project)           |
@@ -13,10 +13,10 @@
 
 ## Sprint Template
 
-| Day           | Luis    | Ezequiel  | Sergio    | Juan José    | José Antonio     | [Member F]     |
-| ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | -------------  |
-| Day 1         | :smile:        |                |                |                |                |                |
-| Day 2         |               |    :smile:            |                |                |                |                |
-| Day 3         |               |    :worried:            |                |                |                |                |
-| Day 4         |  :neutral_face:             |    :smile:           |                |                |                |                |
+| Day           | Luis    | Ezequiel  | Sergio    | Juan José    | José Antonio     | 
+| ------------- | ------------- | -------------  | -------------  | -------------  | -------------  |
+| Day 1         | :smile:        |                |                |                |                | 
+| Day 2         |               |    :smile:            |                |                |                |
+| Day 3         |               |    :worried:            |                |                |                |
+| Day 4         |  :neutral_face:             |    :smile:           |                |                |                |
 ...
