@@ -15,8 +15,7 @@
 
 | Day           | Luis    | Ezequiel  | Sergio    | Juan José    | José Antonio     | 
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  |
-| Day 1         | :smile:        |                |                |                |                | 
-| Day 2         |               |    :smile:            |                |                |                |
-| Day 3         |               |    :worried:            |                |                |                |
-| Day 4         |  :neutral_face:             |    :smile:           |                |                |                |
-...
+| Day 16 / 04         | :smile:        |    :smiley:            |      :smiley:          |       :smiley:         |        :smiley:        | 
+| Day 2         |               |               |                |                |                |
+| Day 3         |               |             |                |                |                |
+| Day 4         |           |       |                |                |                |
