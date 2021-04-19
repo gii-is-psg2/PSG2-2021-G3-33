@@ -16,6 +16,6 @@
 | Day           | Luis    | Ezequiel  | Sergio    | Juan José    | José Antonio     | 
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  |
 | Day 16 / 04         | :smiley:        |    :smiley:            |      :smiley:          |       :smiley:         |        :smiley:        | 
-| Day 2         |               |               |                |                |                |
-| Day 3         |               |             |                |                |                |
+| Day 18 / 04         |   -            |      -         |   -             |      -          |       :smiley:         |
+| Day 19 / 04         |   -            |      -         |   -             |      -          |       :smiley:         |
 | Day 4         |           |       |                |                |                |
