@@ -32,7 +32,7 @@ public class CauseController {
 		List<Cause> causes = new ArrayList<>();
 		causes.addAll(this.causeService.findCauses());
 		model.put("list", causes);
-		return "causes/causeList";
+		return "causes/list";
 	}
 
 	@GetMapping(value = "/causes/new")
@@ -55,7 +55,7 @@ public class CauseController {
 
 	@GetMapping("/causes/{causeId}")
 	public ModelAndView showCause(@PathVariable("causeId") int causeId, Map<String, Object> model) {
-		ModelAndView mav = new ModelAndView("causes/causeDetails");
+		ModelAndView mav = new ModelAndView("causes/details");
 		mav.addObject("cause", this.causeService.findCauseById(causeId));
 		return mav;
 	}
