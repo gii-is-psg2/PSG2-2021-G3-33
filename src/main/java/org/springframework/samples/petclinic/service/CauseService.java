@@ -1,0 +1,32 @@
+package org.springframework.samples.petclinic.service;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.repository.CauseRepository;
+import org.springframework.transaction.annotation.Transactional;
+
+public class CauseService {
+
+	private final CauseRepository causeRepository;
+
+	@Autowired
+	public CauseService(final CauseRepository causeRepository) {
+		this.causeRepository = causeRepository;
+	}
+
+	@Transactional
+	public void saveCause(Cause cause) {
+		causeRepository.save(cause);
+	}
+
+	public Cause findCauseById(int causeId) {
+		return causeRepository.findByCauseId(causeId);
+	}
+
+	@Transactional
+	public Collection<Cause> findCauses() {
+		return causeRepository.findAll();
+	}
+}
