@@ -14,10 +14,12 @@
 		id="add-cause-form">
 		<div class="form-group has-feedback">
 			<form:hidden path="isClosed" />
+			<form:hidden path="budgetCollected" />
 			<fmt:message var="name" key="name" />
 			<fmt:message var="description" key="description" />
 			<fmt:message var="budgetTarget" key="budget_target" />
 			<fmt:message var="organization" key="organization" />
+
 			<petclinic:inputField label="${name}" name="name" />
 			<petclinic:inputField label="${description}" name="description" />
 			<petclinic:inputField label="${budgetTarget}" name="budgetTarget" />

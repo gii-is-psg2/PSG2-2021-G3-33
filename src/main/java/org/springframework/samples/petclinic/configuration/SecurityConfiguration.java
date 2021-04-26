@@ -41,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/vets/**").hasAnyAuthority("admin")
 				.antMatchers("/causes").authenticated()
 				.antMatchers("/causes/**").authenticated()
+				.antMatchers("/causes/{causeId}/donate").hasAnyAuthority("owners")
 				.anyRequest().denyAll()
 				.and()
 				 	.formLogin()
