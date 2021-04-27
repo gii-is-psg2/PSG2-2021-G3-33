@@ -18,4 +18,9 @@
 | Day 16 / 04         | :smiley:        |    :smiley:            |      :smiley:          |       :smiley:         |        :smiley:        | 
 | Day 18 / 04         |   -            |      -         |   -             |      -          |       :smiley:         |
 | Day 19 / 04         |   -            |      -         |   -             |      -          |       :smiley:         |
-| Day 4         |           |       |                |                |                |
+| Day 22 / 04         |     -      |   -    |       -         |     :smiley:         |                |
+| Day 23 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
+| Day 24 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
+| Day 25 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
+| Day 26 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
+| Day 27 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
