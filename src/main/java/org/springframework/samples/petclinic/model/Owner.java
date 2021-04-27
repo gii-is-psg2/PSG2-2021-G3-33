@@ -24,6 +24,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -68,6 +69,9 @@ public class Owner extends Person {
     @JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
 	//
+	
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<AdoptionApplications> applications;
 	
 	public String getAddress() {
 		return this.address;
@@ -167,6 +171,32 @@ public class Owner extends Person {
 		return null;
 	}
 
+	protected Set<AdoptionApplications> getAdoptionApplicationsInternal(){
+		if(this.applications == null) {
+			this.applications = new HashSet<>();
+		}
+		return this.applications;
+	}
+	
+	protected void setAdoptionApplicationsInternal(Set<AdoptionApplications> applications) {
+		this.applications = applications;
+	}
+	
+	public List<AdoptionApplications> getApplications(){
+		List<AdoptionApplications> sortedApplications = new ArrayList<>(this.getAdoptionApplicationsInternal());
+		PropertyComparator.sort(sortedApplications, new MutableSortDefinition("date",false,false));
+		return Collections.unmodifiableList(sortedApplications);
+	}
+	
+	public void addAdoptionApplication(AdoptionApplications application) {
+		getAdoptionApplicationsInternal().add(application);
+		application.setOwner(this);
+	}
+	
+	public boolean removeAdoptionApplication(AdoptionApplications application) {
+		return getAdoptionApplicationsInternal().remove(application);
+	}
+	
 	@Override
 	public String toString() {
 		return new ToStringCreator(this)

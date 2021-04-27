@@ -17,37 +17,34 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.AdoptionApplications;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.samples.petclinic.model.Visit;
+import org.springframework.samples.petclinic.service.AdoptionApplicationService;
 import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
-import java.util.Collection;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Visit;
 
 /**
  * @author Juergen Hoeller
@@ -63,10 +60,13 @@ public class PetController {
 	private final PetService	petService;
 	private final OwnerService	ownerService;
 
+	private final AdoptionApplicationService adoptionApplicationService;
+
 	@Autowired
-	public PetController(final PetService petService, final OwnerService ownerService) {
+	public PetController(final PetService petService, final OwnerService ownerService,AdoptionApplicationService adoptionApplicationService) {
 		this.petService = petService;
 		this.ownerService = ownerService;
+		this.adoptionApplicationService = adoptionApplicationService;
 	}
 
 	@ModelAttribute("types")
@@ -176,5 +176,34 @@ public class PetController {
     		pet.removeVisit(visit);
     		this.petService.deleteVisit(visit);
     		return "owners/ownerDetails";
+    	}
+    	
+    	@GetMapping("/pets/{petId}/{status}")
+    	public String changeDisponibility(@PathVariable("petId")int petId, @PathVariable("status") boolean status,@PathVariable("ownerId") int ownerId, Map<String,Object> model) throws DataAccessException, DuplicatedPetNameException {
+    		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    		String username;
+    		
+    		if(principal instanceof UserDetails) {
+    			username = ((UserDetails)principal).getUsername();
+    		}else {
+    			username = principal.toString();
+    		}
+    		
+    		Owner owner = this.ownerService.findOwnerByUsername(username);
+    		Pet petToUpdate = this.petService.findPetById(petId);
+    		
+    		if(status == false) {
+        		for(AdoptionApplications ap : petToUpdate.getApplications()) {
+        			Owner applicantOwner = ap.getOwner();
+        			applicantOwner.removeAdoptionApplication(ap);
+    				petToUpdate.removeAdoptionApplication(ap);
+    				this.adoptionApplicationService.deleteAdoptionApplication(ap);
+    			}
+    		}
+       		petToUpdate.setStatus(status);
+       		this.petService.savePet(petToUpdate);
+       		model.put("owner", owner);
+
+    		return "redirect:/owners/{ownerId}";
     	}
 }

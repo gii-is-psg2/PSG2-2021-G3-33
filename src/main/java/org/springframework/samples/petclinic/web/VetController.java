@@ -23,11 +23,15 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.FormVetType;
+import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
+import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.SpecialtyService;
 import org.springframework.samples.petclinic.service.VetService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,12 +55,15 @@ public class VetController {
 	private final VetService		vetService;
 
 	private final SpecialtyService	specialtyService;
+	
+	private final OwnerService ownerService;
 
 
 	@Autowired
-	public VetController(final VetService vetService, final SpecialtyService specialtyService) {
+	public VetController(final VetService vetService, final SpecialtyService specialtyService, OwnerService ownerService) {
 		this.vetService = vetService;
 		this.specialtyService = specialtyService;
+		this.ownerService = ownerService;
 	}
 
 	@GetMapping(value = {
@@ -66,6 +73,21 @@ public class VetController {
 		// Here we are returning an object of type 'Vets' rather than a collection of Vet
 		// objects
 		// so it is simpler for Object-Xml mapping
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String autoridad;
+		String username;
+		if(principal instanceof UserDetails) {
+			autoridad = ((UserDetails)principal).getAuthorities().iterator().next().toString();
+			username = ((UserDetails)principal).getUsername();
+		}else {
+			autoridad = principal.toString();
+			username = principal.toString();
+		}
+		if(autoridad.equals("owner")) {
+			Owner owner = this.ownerService.findOwnerByUsername(username);
+			model.put("owner", owner);
+		}
+		
 		final Vets vets = new Vets();
 		vets.getVetList().addAll(this.vetService.findVets());
 		model.put("vets", vets);
