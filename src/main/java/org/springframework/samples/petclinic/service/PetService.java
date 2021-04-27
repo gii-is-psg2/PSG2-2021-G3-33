@@ -93,4 +93,9 @@ public class PetService {
 	public Visit findVisitById(int id) throws DataAccessException{
 		return visitRepository.findById(id);
 	}
+
+    public Collection<Visit> findAllVisitsByPetId(Integer PetId) {
+        return this.petRepository.findAllVisitsByPetId(PetId);
+    }
+
 }
