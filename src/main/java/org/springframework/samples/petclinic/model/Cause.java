@@ -8,6 +8,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+
+
 @Entity
 @Table(name = "causes")
 public class Cause extends BaseEntity {
@@ -24,6 +26,11 @@ public class Cause extends BaseEntity {
 	@Column(name = "budget_target")
 	@Min(0)
 	private Double budgetTarget;
+
+	@NotNull
+	@Column(name = "budget_collected")
+	@Min(0)
+	private Double budgetCollected;
 
 	@NotBlank
 	@Column(name = "organization")
@@ -71,5 +78,13 @@ public class Cause extends BaseEntity {
 
 	public void setIsClosed(Boolean isClosed) {
 		this.isClosed = isClosed;
+	}
+	
+	public Double getBudgetCollected() {
+		return budgetCollected;
+	}
+
+	public void setBudgetCollected(Double budgetCollected) {
+		this.budgetCollected = budgetCollected;
 	}
 }
