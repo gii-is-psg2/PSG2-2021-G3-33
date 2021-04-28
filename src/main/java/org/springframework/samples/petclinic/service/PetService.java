@@ -99,4 +99,8 @@ public class PetService {
 	public List<Pet> findPetsInAdoption() throws DataAccessException{
 		return petRepository.findInAdoption();
 	}
+
+    public Collection<Visit> findAllVisitsByPetId(Integer PetId) {
+        return this.petRepository.findAllVisitsByPetId(PetId);
+    }
 }
