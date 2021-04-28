@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!--  >%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%-->
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
@@ -39,6 +40,12 @@
 					title="Veterinarios">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span><fmt:message key="veterinarians" /></span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'enAdopcion'}" url="/petsInAdoption"
+					title="enAdopcion">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>En adopcion</span>
 				</petclinic:menuItem>
 
 				<sec:authorize access="hasAnyAuthority('admin')">
@@ -88,6 +95,20 @@
 									</div>
 								</div>
 							</li>
+							<sec:authorize access="hasAnyAuthority('owner')">
+							<li class="divider"></li>
+							<li>
+								<div class="navbar-login navbar-loggin-session">
+									<div class="row">
+										<div class="col-lg-12">
+												<spring:url value="/owners/{ownerId}" var="profileUrl">
+													<spring:param name="ownerId" value="${owner.id}"></spring:param>
+												</spring:url><a href="${fn:escapeXml(profileUrl)}" class="btn btn-primary btn-block"><fmt:message key="profile"/></a>
+										</div>
+									</div>
+								</div>
+							</li>
+							</sec:authorize>
 							<li class="divider"></li>
 							<!-- 							
                             <li> 
