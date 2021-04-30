@@ -65,7 +65,6 @@ public class AdoptionController {
 	@GetMapping("/petsInAdoption/adopt={petId}")
 	public String initAdoptionForm(@PathVariable("petId") int petId, final Map<String, Object> model) {
 		final AdoptionApplications application = new AdoptionApplications();
-		System.out.println("ID DE LA APLICATION: " + application.getId());
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username;
 		if(principal instanceof UserDetails) {

@@ -94,3 +94,10 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
+
+INSERT INTO causes(id,budget_collected,budget_target,description, is_closed,name,organization) VALUES (1, 20, 200, 'A simple cause 1', false, 'Example cause 1', 'Organization 1');
+INSERT INTO causes(id,budget_collected,budget_target,description, is_closed,name,organization) VALUES (2, 0, 200, 'A simple cause 2', false, 'Example cause 2', 'Organization 2');
+INSERT INTO causes(id,budget_collected,budget_target,description, is_closed,name,organization) VALUES (3, 120, 200, 'A simple cause 3', false, 'Example cause 3', 'Organization 3');
+INSERT INTO causes(id,budget_collected,budget_target,description, is_closed,name,organization) VALUES (4, 0, 200, 'A simple cause 4', false, 'Example cause 3', 'Organization 4');
+
+
