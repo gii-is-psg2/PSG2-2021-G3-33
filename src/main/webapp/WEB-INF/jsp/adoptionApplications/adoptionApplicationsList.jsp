@@ -56,8 +56,7 @@
 				</td>
 				
 				<td valign="middle">
-				<!--  Cambiar cuando implemente los dos controladores(uno para cancelar[que borre solo una solicitud] y el otro
-				para aceptar[que borre todas las solicitudes y cambie el dueño a la mascota[) -->
+
 					<spring:url value="/adoptionRequests/{petId}/{applicationId}/accept" var="acceptUrl">
 						<spring:param name="petId" value="${application.pet.id}"></spring:param>
 						<spring:param name="applicationId" value="${application.id}"></spring:param>

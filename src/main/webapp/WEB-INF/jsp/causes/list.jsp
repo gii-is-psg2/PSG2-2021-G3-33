@@ -23,9 +23,6 @@
 			</tr>
 		</thead>
 		<tbody>
-		<sec:authorize access="hasAnyAuthority(admin)">
-			<p>test</p>
-		</sec:authorize>
 			<c:forEach items="${list}" var="entry">
 				<tr>
 					<td><spring:url value="/causes/{causeId}" var="causeUrl">
@@ -51,6 +48,7 @@
 		</tbody>
 	</table>
 
+	<sec:authorize access="hasAnyAuthority('admin')">
 	<table class="table-buttons">
 		<tr>
 			<td><a class="btn btn-default" style="margin-right: 10px"
@@ -58,4 +56,5 @@
 					Causa</a></td>
 		</tr>
 	</table>
+	</sec:authorize>
 </petclinic:layout>

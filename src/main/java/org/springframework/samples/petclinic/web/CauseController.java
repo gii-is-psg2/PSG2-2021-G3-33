@@ -9,7 +9,11 @@ import javax.validation.Valid;
 import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.CauseService;
+import org.springframework.samples.petclinic.service.OwnerService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,15 +28,26 @@ public class CauseController {
 	private static final String VIEWS_CAUSE_CREATE_OR_UPDATE_FORM = "causes/createOrUpdateCauseForm";
 	private static final String VIEWS_DONATION_FORM = "causes/donationForm";
 	private final CauseService causeService;
+	private final OwnerService	ownerService;
 
 	@Autowired
-	public CauseController(CauseService causeService) {
+	public CauseController(CauseService causeService,OwnerService	ownerService) {
 		this.causeService = causeService;
+		this.ownerService = ownerService;
 	}
 
 	@GetMapping(value = { "/causes" })
 	public String showCauseList(Map<String, Object> model) {
 		List<Cause> causes = new ArrayList<>();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if(principal instanceof UserDetails) {
+			username = ((UserDetails)principal).getUsername();
+		}else {
+			username = principal.toString();
+		}
+		Owner owner = this.ownerService.findOwnerByUsername(username);
+		model.put("owner", owner);
 		causes.addAll(this.causeService.findCauses());
 		model.put("list", causes);
 		return "causes/list";
