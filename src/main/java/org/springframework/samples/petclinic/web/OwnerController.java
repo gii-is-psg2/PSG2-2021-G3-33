@@ -24,13 +24,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.AuthoritiesService;
 import org.springframework.samples.petclinic.service.OwnerService;
-import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -55,7 +59,7 @@ public class OwnerController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
-
+	
 	@GetMapping(value = "/owners/new")
 	public String initCreationForm(Map<String, Object> model) {
 		Owner owner = new Owner();
@@ -78,14 +82,60 @@ public class OwnerController {
 
 	@GetMapping(value = "/owners/find")
 	public String initFindForm(Map<String, Object> model) {
-		model.put("owner", new Owner());
-		return "owners/findOwners";
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String autoridad;
+
+		String view = "redirect:/oups";
+		
+		if(principal instanceof UserDetails) {
+			autoridad = ((UserDetails)principal).getAuthorities().iterator().next().toString();
+		}else {
+			autoridad = principal.toString();
+		}
+		if(autoridad.equals("admin")) {
+			model.put("owner", new Owner());
+			view = "owners/findOwners";
+		}
+		return view;
 	}
 
 	@GetMapping(value = "/owners")
 	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 
-		// allow parameterless GET request for /owners to return all records
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String autoridad;
+
+		String view = "redirect:/oups";
+		if(principal instanceof UserDetails) {
+			autoridad = ((UserDetails)principal).getAuthorities().iterator().next().toString();
+		}else {
+			autoridad = principal.toString();
+		}
+		if(autoridad.equals("admin")) {
+			if (owner.getLastName() == null) {
+				owner.setLastName(""); // empty string signifies broadest possible search
+			}
+
+			// find owners by last name
+			Collection<Owner> results = this.ownerService.findOwnerByLastName(owner.getLastName());
+			if (results.isEmpty()) {
+				// no owners found
+				result.rejectValue("lastName", "notFound", "not found");
+				view = "owners/findOwners";
+			}
+			else if (results.size() == 1) {
+				// 1 owner found
+				owner = results.iterator().next();
+				view = "redirect:/owners/" + owner.getId();
+			}
+			else {
+				// multiple owners found
+				model.put("selections", results);
+				view = "owners/ownersList";
+			}
+		}
+		return view;
+/*		// allow parameterless GET request for /owners to return all records
 		if (owner.getLastName() == null) {
 			owner.setLastName(""); // empty string signifies broadest possible search
 		}
@@ -106,14 +156,29 @@ public class OwnerController {
 			// multiple owners found
 			model.put("selections", results);
 			return "owners/ownersList";
-		}
+		}*/
 	}
 
 	@GetMapping(value = "/owners/{ownerId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model model) {
-		Owner owner = this.ownerService.findOwnerById(ownerId);
-		model.addAttribute(owner);
-		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String autoridad;
+
+		String view = "redirect:/oups";
+		
+		if(principal instanceof UserDetails) {
+			autoridad = ((UserDetails)principal).getAuthorities().iterator().next().toString();
+		}else {
+			autoridad = principal.toString();
+		}
+		
+		if(autoridad.equals("admin")) {
+			Owner owner = this.ownerService.findOwnerById(ownerId);
+			model.addAttribute(owner);
+			view = VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+		}
+		
+		return view;
 	}
 
 	@PostMapping(value = "/owners/{ownerId}/edit")
@@ -136,8 +201,29 @@ public class OwnerController {
 	 */
 	@GetMapping("/owners/{ownerId}")
 	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
-		ModelAndView mav = new ModelAndView("owners/ownerDetails");
-		mav.addObject(this.ownerService.findOwnerById(ownerId));
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String autoridad;
+		String username;
+		ModelAndView mav = new ModelAndView("redirect:/oups");
+		
+		if(principal instanceof UserDetails) {
+			autoridad = ((UserDetails)principal).getAuthorities().iterator().next().toString();
+			username = ((UserDetails)principal).getUsername();
+		}else {
+			autoridad = principal.toString();
+			username = principal.toString();
+		}
+		if(autoridad.equals("admin")) {
+			mav = new ModelAndView("owners/ownerDetails");
+			mav.addObject(this.ownerService.findOwnerById(ownerId));
+			
+		}else if(autoridad.equals("owner")) {
+			Owner owner = this.ownerService.findOwnerByUsername(username);
+			if(owner.getId() == ownerId) {
+				mav = new ModelAndView("owners/ownerDetails");
+				mav.addObject(this.ownerService.findOwnerById(ownerId));	
+			}
+		}
 		return mav;
 	}
 

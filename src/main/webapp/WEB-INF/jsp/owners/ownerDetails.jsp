@@ -81,6 +81,50 @@
 						<dd>
 							<c:out value="${pet.type.name}" />
 						</dd>
+						<dt>
+							<fmt:message key="status" />
+						</dt>
+						<dd>
+							<c:if test="${pet.status == false }">
+								<fmt:message key="NoAdoption" />
+							</c:if>
+							<c:if test="${pet.status == true }">
+								<fmt:message key="Adoption" />
+							</c:if>	
+						</dd>
+						<sec:authorize access="hasAnyAuthority('owner')">
+						<dd>
+							<c:if test="${pet.status == false }">
+								<div class="col-sm-offset-12 col-sm-4">
+									<spring:url value="/owners/{ownerId}/pets/{petId}/{status}" var="statusUrl">
+										<spring:param name="ownerId" value="${owner.id}"></spring:param>
+										<spring:param name="petId" value="${pet.id}"></spring:param>
+										<spring:param name="status" value="${true}"></spring:param>
+									
+									</spring:url>
+									<a href="${fn:escapeXml(statusUrl)}" class="btn btn-default"><fmt:message key="inAdoption" /></a>
+								</div>
+							</c:if>
+							<c:if test="${pet.status == true }">
+								<div class="col-sm-offset-12 col-sm-4">
+									<spring:url value="/owners/{ownerId}/pets/{petId}/{status}" var="statusUrl">
+										<spring:param name="ownerId" value="${owner.id}"></spring:param>
+										<spring:param name="petId" value="${pet.id}"></spring:param>
+										<spring:param name="status" value="${false}"></spring:param>
+									
+									</spring:url>
+									<a href="${fn:escapeXml(statusUrl)}" class="btn btn-default"><fmt:message key="cancelAdoption" /></a>
+								</div>
+							</c:if>
+						</dd>
+						<dd>
+							<spring:url value="/adoptionRequests/{petId}"
+									var="applicationsUrl">
+									<spring:param name="petId" value="${pet.id}" />
+								</spring:url> <a href="${fn:escapeXml(applicationsUrl)}"><fmt:message
+										key="seeRequests" /></a>
+						</dd>
+						</sec:authorize>
 					</dl>
 				</td>
 				<td valign="top">
@@ -106,6 +150,7 @@
 											key="cancelledVisit" /></a></td>
 							</tr>
 						</c:forEach>
+						<sec:authorize access="hasAnyAuthority('admin')">
 						<tr>
 							<td><spring:url value="/owners/{ownerId}/pets/{petId}/edit"
 									var="petUrl">
@@ -133,6 +178,7 @@
 								</spring:url> <a href="${fn:escapeXml(roomsUrl)}"><fmt:message
 										key="addStay" /></a></td>
 						</tr>
+						</sec:authorize>
 					</table>
 				</td>
 				<td style="verticla-align: top;">
@@ -170,5 +216,64 @@
 
 		</c:forEach>
 	</table>
-
+	<br />
+	<br />
+	<br />
+	<h2>
+		<fmt:message key="myAdoptionApplication" />
+	</h2>
+	<table class="table table-striped">
+		<c:forEach var="application" items="${owner.applications}">
+			<tr>
+				<td valign="top">
+					<dl class="dl-horizontal">
+						<dt>
+							<fmt:message key="name" />
+						</dt>
+						<dd>
+							<c:out value="${application.pet.name}" />
+						</dd>
+						<dt>
+							<fmt:message key="birthDate" />
+						</dt>
+						<dd>
+							<petclinic:localDate date="${application.pet.birthDate}" pattern="yyyy-MM-dd" />
+						</dd>
+						<dt>
+							<fmt:message key="type" />
+						</dt>
+						<dd>
+							<c:out value="${application.pet.type.name}" />
+						</dd>
+						<dt>
+							<fmt:message key="owner" />
+						</dt>
+						<dd>
+							<c:out value="${application.pet.owner.firstName} ${application.pet.owner.lastName}" />
+						</dd>
+					</dl>
+				</td>
+				
+				<td valign="top">
+					<dl class="dl-horizontal">
+						<dt>
+							<fmt:message key="description" />
+						</dt>
+						<dd>
+							<c:out value="${application.description}" />
+						</dd>
+					</dl>
+				</td>
+				
+				<td valign="middle">
+					<spring:url value="/petsInAdoption/{petId}/{applicationId}/cancel" var="statusUrl">
+						<spring:param name="petId" value="${application.pet.id}"></spring:param>
+						<spring:param name="applicationId" value="${application.id}"></spring:param>
+									
+					</spring:url>
+					<a href="${fn:escapeXml(statusUrl)}" class="btn btn-default"><fmt:message key="cancelApplication" /></a>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
 </petclinic:layout>

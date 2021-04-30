@@ -15,9 +15,12 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,15 +30,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Simple business object representing a pet.
@@ -65,6 +64,13 @@ public class Pet extends NamedEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
 	private Set<Room> rooms;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
+	private Set<AdoptionApplications> applications;
+	
+	@Column(name = "status")
+	@NotNull
+	private boolean status;
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
@@ -116,10 +122,6 @@ public class Pet extends NamedEntity {
 		return getVisitsInternal().remove(visit);
 	}
 
-//	public Set<Room> getRooms() {
-//		return rooms;
-//	}
-
 	public void setRooms(Set<Room> rooms) {
 		this.rooms = rooms;
 	}
@@ -146,7 +148,7 @@ public class Pet extends NamedEntity {
 		room.setPet(this);
 	}
 	
-	public void deleteRoom(Room room) { // poner como deleteVisits para ver si funciona
+	public void deleteRoom(Room room) {
 		List<Room> rooms = this.getRooms();
 		for(Room r : rooms) {
 			if(r.getDetails() == null) {
@@ -155,5 +157,39 @@ public class Pet extends NamedEntity {
 		}
 		this.rooms.remove(room);
 		room.setPet(this);
+	}
+	
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	protected Set<AdoptionApplications> getAdoptionApplicationsInternal(){
+		if(this.applications == null) {
+			this.applications = new HashSet<>();
+		}
+		return this.applications;
+	}
+
+	protected void setAdoptionApplicationsInternal(Set<AdoptionApplications> applications) {
+		this.applications = applications;
+	}
+	
+	public List<AdoptionApplications> getApplications(){
+		List<AdoptionApplications> sortedApplications = new ArrayList<>(this.getAdoptionApplicationsInternal());
+		PropertyComparator.sort(sortedApplications, new MutableSortDefinition("date",false,false));
+		return Collections.unmodifiableList(sortedApplications);
+	}
+	
+	public void addAdoptionApplication(AdoptionApplications application) {
+		getAdoptionApplicationsInternal().add(application);
+		application.setPet(this);
+	}
+	
+	public boolean removeAdoptionApplication(AdoptionApplications application) {
+		return getAdoptionApplicationsInternal().remove(application);
 	}
 } 
