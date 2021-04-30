@@ -38,7 +38,7 @@ public class CauseService {
 		String res = "";
 		Cause originalCause = this.findCauseById(causeId);
 		Double totalCollected = cause.getBudgetCollected() + originalCause.getBudgetCollected();
-		if (cause.getBudgetCollected() > 0) {
+		if (cause.getBudgetCollected() > 0 || ) {
 			originalCause.setBudgetCollected(totalCollected);
 			res = "redirect:/causes/";
 			if (totalCollected >= originalCause.getBudgetTarget()) {

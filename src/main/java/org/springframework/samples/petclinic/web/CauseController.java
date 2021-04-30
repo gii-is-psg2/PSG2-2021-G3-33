@@ -73,8 +73,13 @@ public class CauseController {
 
 	@PostMapping(value = "/causes/{causeId}/donate")
 	public String processDonationForm(@PathVariable("causeId") int causeId, Cause cause, BindingResult result) {
+		if (result.hasErrors()) {
+			return "redirect:/causes/"+ causeId+"/donate";
+		} else {
 			String returnPath = this.causeService.saveDonation(cause, causeId);
 			return returnPath;
+		}
+			
 		
 	}
 
