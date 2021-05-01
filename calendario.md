@@ -25,3 +25,4 @@
 | Day 26 / 04         | :neutral_face:  |   -    |       -         |     :neutral_face:         |                |
 | Day 27 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
 | Day 28 / 04         |   :neutral_face:      |   -    |       -         |   -     |                |
+| Day 01 / 05         |   :smiley:      |   -    |       -         |   -     |                |
