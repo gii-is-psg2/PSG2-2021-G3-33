@@ -22,7 +22,8 @@
 | Day 23 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
 | Day 24 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
 | Day 25 / 04         |     :smiley:    |   -    |       -         |     :neutral_face:         |                |
-| Day 26 / 04         | :neutral_face:  |   -    |       -         |     :neutral_face:         |                |
+| Day 26 / 04         | :neutral_face:  |   -    |       😐        |     :neutral_face:         |                |
 | Day 27 / 04         |     -      |   -    |       -         |     :neutral_face:         |                |
 | Day 28 / 04         |   :neutral_face:      |   -    |       -         |   -     |                |
 | Day 01 / 05         |   :smiley:      |   -    |       -         |   -     |                |
+| Day 02 / 05         |    -    |   -    |       :smiley:         |   -     |                |
