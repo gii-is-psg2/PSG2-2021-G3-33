@@ -41,9 +41,9 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span><fmt:message key="veterinarians" /></span>
 				</petclinic:menuItem>
-				
-				<petclinic:menuItem active="${name eq 'enAdopcion'}" url="/petsInAdoption"
-					title="enAdopcion">
+
+				<petclinic:menuItem active="${name eq 'enAdopcion'}"
+					url="/petsInAdoption" title="enAdopcion">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>En adopcion</span>
 				</petclinic:menuItem>
@@ -59,6 +59,12 @@
 						<span>Error</span>
 					</petclinic:menuItem>
 				</sec:authorize>
+
+				<petclinic:menuItem active="${name eq 'health'}"
+					url="/manage/health" title="Comprueba el estado de la Web">
+					<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+					<span>Health Check</span>
+				</petclinic:menuItem>
 			</ul>
 
 
@@ -75,8 +81,7 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
 							<strong><sec:authentication property="name" /></strong> <span
-							class="glyphicon glyphicon-chevron-down"></span>
-					</a>
+							class="glyphicon glyphicon-chevron-down"></span> </a>
 						<ul class="dropdown-menu">
 							<li>
 								<div class="navbar-login">
@@ -100,18 +105,21 @@
 								</div>
 							</li>
 							<sec:authorize access="hasAnyAuthority('owner')">
-							<li class="divider"></li>
-							<li>
-								<div class="navbar-login navbar-loggin-session">
-									<div class="row">
-										<div class="col-lg-12">
+								<li class="divider"></li>
+								<li>
+									<div class="navbar-login navbar-loggin-session">
+										<div class="row">
+											<div class="col-lg-12">
 												<spring:url value="/owners/{ownerId}" var="profileUrl">
 													<spring:param name="ownerId" value="${owner.id}"></spring:param>
-												</spring:url><a href="${fn:escapeXml(profileUrl)}" class="btn btn-primary btn-block"><fmt:message key="profile"/></a>
+												</spring:url>
+												<a href="${fn:escapeXml(profileUrl)}"
+													class="btn btn-primary btn-block"><fmt:message
+														key="profile" /></a>
+											</div>
 										</div>
 									</div>
-								</div>
-							</li>
+								</li>
 							</sec:authorize>
 							<li class="divider"></li>
 							<!-- 							
