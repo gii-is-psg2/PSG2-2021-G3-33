@@ -61,7 +61,7 @@
 				</sec:authorize>
 
 				<petclinic:menuItem active="${name eq 'health'}"
-					url="/manage/health" title="Comprueba el estado de la Web">
+					url="/health/checkHealth" title="Comprueba el estado de la Web">
 					<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
 					<span>Health Check</span>
 				</petclinic:menuItem>
