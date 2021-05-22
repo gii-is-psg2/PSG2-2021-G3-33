@@ -5,7 +5,7 @@
 
 <petclinic:layout pageName="error">
 
-    <spring:url value="/resources/images/courage.png" var="petsImage"/>
+    <spring:url value="https://www.pikpng.com/pngl/b/290-2907773_shy-courage-the-cowardly-dog-png-download-courage.png" var="petsImage"/>
     <img src="${petsImage}" width="15%"/>
 
     <h2><fmt:message key="somethingHappend"/></h2>
