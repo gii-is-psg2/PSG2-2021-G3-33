@@ -48,7 +48,6 @@
 		</tbody>
 	</table>
 
-	<sec:authorize access="hasAnyAuthority('admin')">
 	<table class="table-buttons">
 		<tr>
 			<td><a class="btn btn-default" style="margin-right: 10px"
@@ -56,5 +55,5 @@
 					Causa</a></td>
 		</tr>
 	</table>
-	</sec:authorize>
+
 </petclinic:layout>
