@@ -30,6 +30,7 @@ import org.springframework.samples.petclinic.model.Vets;
 import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.SpecialtyService;
 import org.springframework.samples.petclinic.service.VetService;
+import org.springframework.samples.petclinic.util.VetValidator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -103,6 +104,13 @@ public class VetController {
 
 	@PostMapping(value = "/vets/new")
 	public String processCreationForm(@ModelAttribute(name = "vet") @Valid final FormVetType vetType, final BindingResult result) {
+		if(VetValidator.validateNameVet(vetType)) {
+			result.rejectValue("firstName", "firstNameError", "Por favor no introduzca números ni caracteres especiales en el nombre");
+		}
+		if(VetValidator.validateLastNameVe(vetType)) {
+			result.rejectValue("firstName", "firstNameError", "Por favor no introduzca números ni caracteres especiales en el apellido");
+		}
+		
 		if (result.hasErrors()) {
 			return VetController.VIEWS_VET_CREATE_FORM;
 		} else {
@@ -132,6 +140,14 @@ public class VetController {
 
 	@PostMapping(value = "/vets/{vetId}/edit")
 	public String processUpdateVetForm(@ModelAttribute(name = "vet") @Valid final FormVetType vetType, final BindingResult result, @PathVariable("vetId") final int vetId) {
+		
+		if(VetValidator.validateNameVet(vetType)) {
+			result.rejectValue("firstName", "firstNameError", "Por favor no introduzca números ni caracteres especiales en el nombre");
+		}
+		if(VetValidator.validateLastNameVe(vetType)) {
+			result.rejectValue("firstName", "firstNameError", "Por favor no introduzca números ni caracteres especiales en el apellido");
+		}
+		
 		if (result.hasErrors()) {
 			return VetController.VIEWS_VET_EDIT_FORM;
 		} else {
