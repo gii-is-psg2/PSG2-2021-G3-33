@@ -230,7 +230,6 @@ public class OwnerController {
 	@GetMapping("/owners/{ownerId}/delete")
 	public String deleteOwner(@PathVariable("ownerId") int ownerId, Map<String,Object> model) {
 		Owner owner = this.ownerService.findOwnerById(ownerId);
-		owner.setUser(null);
 		this.ownerService.deleteOwner(owner);
 		return "redirect:/owners";
 	}
