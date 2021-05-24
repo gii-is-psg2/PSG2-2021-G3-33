@@ -25,14 +25,16 @@
 			<petclinic:inputField label="${budgetTarget}" name="budgetTarget" />
 			<petclinic:inputField label="${organization}" name="organization" />
 		</div>
+		
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<c:choose>
 					<c:when test="${cause['new']}">
-						<button class="btn btn-default" type="submit">Crear Causa</button>
+							<button class="btn btn-default" type="submit">Crear Causa</button>											
 					</c:when>
-				</c:choose>
+				</c:choose>	
 			</div>
 		</div>
+		
 	</form:form>
 </petclinic:layout>
