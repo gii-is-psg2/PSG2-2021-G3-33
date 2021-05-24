@@ -111,6 +111,9 @@ public class PetController {
 
 	@PostMapping(value = "/pets/new")
 	public String processCreationForm(final Owner owner, @Valid final Pet pet, final BindingResult result, final ModelMap model) {
+		if (PetValidator.validateBirthDate(pet)) {
+			result.rejectValue("birthDate", "birthDateError","La fecha debe ser anterior al dia de hoy");
+		}
 		if (result.hasErrors()) {
 			model.put("pet", pet);
 			return PetController.VIEWS_PETS_CREATE_OR_UPDATE_FORM;
@@ -145,7 +148,10 @@ public class PetController {
 	 */
 	@PostMapping(value = "/pets/{petId}/edit")
 	public String processUpdateForm(@Valid final Pet pet, final BindingResult result, final Owner owner, @PathVariable("petId") final int petId, final ModelMap model) {
-		if (result.hasErrors()) {
+		if (PetValidator.validateBirthDate(pet)) {
+			result.rejectValue("birthDate", "birthDateError","La fecha debe ser anterior al dia de hoy");
+		}
+        if (result.hasErrors()) {
 			model.put("pet", pet);
 			return PetController.VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 		} else {
