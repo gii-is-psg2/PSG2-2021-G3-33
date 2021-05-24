@@ -19,10 +19,11 @@
 			<fmt:message var="description" key="description" />
 			<fmt:message var="budgetTarget" key="budget_target" />
 			<fmt:message var="organization" key="organization" />
+			<fmt:message var="digitosPattern" key="digitosPattern" />
 
 			<petclinic:inputField label="${name}" name="name" />
 			<petclinic:inputField label="${description}" name="description" />
-			<petclinic:inputField label="${budgetTarget}" name="budgetTarget" />
+			<petclinic:inputField label="${budgetTarget}" name="budgetTarget" pattern="\d+\.?\d{2}" placeholder="${digitosPattern}"/>
 			<petclinic:inputField label="${organization}" name="organization" />
 		</div>
 		<div class="form-group">
