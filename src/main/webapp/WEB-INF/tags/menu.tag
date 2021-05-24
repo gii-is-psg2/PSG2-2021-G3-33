@@ -52,8 +52,11 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span><fmt:message key="causes" /></span>
 				</petclinic:menuItem>
-
-
+				<petclinic:menuItem active="${name eq 'health'}"
+					url="/health/checkHealth" title="Comprueba el estado de la Web">
+					<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+					<span>Health Check</span>
+				</petclinic:menuItem>
 			</ul>
 
 
