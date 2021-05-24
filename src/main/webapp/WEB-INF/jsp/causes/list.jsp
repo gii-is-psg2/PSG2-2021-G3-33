@@ -10,7 +10,7 @@
 <petclinic:layout pageName="causes">
 	<h2>Causas</h2>
 
-	<table id="causesTable" class="table table-striped">
+	<table id="causesTable" class="table table-striped" style="width:90%; margin-left:5%">
 		<thead>
 			<tr>
 				<th><fmt:message key="name" /></th>

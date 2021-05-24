@@ -52,14 +52,6 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span><fmt:message key="causes" /></span>
 				</petclinic:menuItem>
-				<sec:authorize access="hasAnyAuthority('admin')">
-					<petclinic:menuItem active="${name eq 'error'}" url="/oups"
-						title="Muestra la vista de error">
-						<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-						<span>Error</span>
-					</petclinic:menuItem>
-				</sec:authorize>
-
 				<petclinic:menuItem active="${name eq 'health'}"
 					url="/health/checkHealth" title="Comprueba el estado de la Web">
 					<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
@@ -122,6 +114,23 @@
 								</li>
 							</sec:authorize>
 							<li class="divider"></li>
+							<li>
+								<petclinic:menuItem active="${name eq 'health'}"
+									url="/manage/health" title="Comprueba el estado de la Web">
+								<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+								<span>Health Check</span>
+								</petclinic:menuItem>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<sec:authorize access="hasAnyAuthority('admin')">
+									<petclinic:menuItem active="${name eq 'error'}" url="/oups"
+										title="Muestra la vista de error">
+										<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+										<span>Error</span>
+									</petclinic:menuItem>
+								</sec:authorize>
+							</li>
 							<!-- 							
                             <li> 
 								<div class="navbar-login navbar-login-session">
