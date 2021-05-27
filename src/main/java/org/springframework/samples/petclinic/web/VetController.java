@@ -107,8 +107,8 @@ public class VetController {
 		if(VetValidator.validateNameVet(vetType)) {
 			result.rejectValue("firstName", "firstNameError", "Por favor no introduzca números ni caracteres especiales en el nombre");
 		}
-		if(VetValidator.validateLastNameVe(vetType)) {
-			result.rejectValue("firstName", "firstNameError", "Por favor no introduzca números ni caracteres especiales en el apellido");
+		if(VetValidator.validateLastNameVet(vetType)) {
+			result.rejectValue("lastName", "lastNameError", "Por favor no introduzca números ni caracteres especiales en el apellido");
 		}
 		
 		if (result.hasErrors()) {
@@ -144,8 +144,8 @@ public class VetController {
 		if(VetValidator.validateNameVet(vetType)) {
 			result.rejectValue("firstName", "firstNameError", "Por favor no introduzca números ni caracteres especiales en el nombre");
 		}
-		if(VetValidator.validateLastNameVe(vetType)) {
-			result.rejectValue("firstName", "firstNameError", "Por favor no introduzca números ni caracteres especiales en el apellido");
+		if(VetValidator.validateLastNameVet(vetType)) {
+			result.rejectValue("lastName", "lastNameError", "Por favor no introduzca números ni caracteres especiales en el apellido");
 		}
 		
 		if (result.hasErrors()) {
