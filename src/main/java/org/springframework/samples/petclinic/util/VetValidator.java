@@ -19,7 +19,7 @@ public class VetValidator {
 		return res;
 	}
 	
-	public static boolean validateLastNameVe(FormVetType vet) {
+	public static boolean validateLastNameVet(FormVetType vet) {
 		boolean res = false;
 		if(!vet.getLastName().matches(regex)) {
 			res = true;
